@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Switch, Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
+import About from './views/About';
 import Home from './views/Home';
 
 export default class App extends Component {
@@ -34,7 +36,14 @@ export default class App extends Component {
       <div>
         <Navbar myName={myName}/>
         <div className='container'>
-          <Home myName={myName} updateName={this.updateName}/>
+          <Switch>
+            <Route exact path='/'>
+              <Home myName={myName} updateName={this.updateName}/>
+            </Route>
+            <Route exact path='/about'>
+              <About />
+            </Route>
+          </Switch>
         </div>
       </div>
     )
