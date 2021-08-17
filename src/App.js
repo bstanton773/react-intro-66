@@ -3,6 +3,7 @@ import { Switch, Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import About from './views/About';
 import Home from './views/Home';
+import Users from './views/Users';
 
 export default class App extends Component {
   constructor(props){
@@ -21,17 +22,17 @@ export default class App extends Component {
     })
   }
 
-    componentDidMount(){
-      console.log('Component Did Mount...')
-      fetch('https://ergast.com/api/f1/2021/10/driverStandings.json')
-        .then(res => res.json())
-        .then(data => {
-          console.log(data);
-          this.setState({
-            racers: data.MRData.StandingsTable.StandingsLists[0].DriverStandings
-          })
+  componentDidMount(){
+    console.log('Component Did Mount...')
+    fetch('https://ergast.com/api/f1/2021/10/driverStandings.json')
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        this.setState({
+          racers: data.MRData.StandingsTable.StandingsLists[0].DriverStandings
         })
-    }
+      })
+  }
 
   render() {
     console.log('Component Rendering...')
@@ -46,6 +47,9 @@ export default class App extends Component {
             </Route>
             <Route exact path='/about'>
               <About />
+            </Route>
+            <Route exact path='/users'>
+              <Users />
             </Route>
           </Switch>
         </div>
