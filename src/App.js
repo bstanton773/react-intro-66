@@ -21,17 +21,17 @@ export default class App extends Component {
     })
   }
 
-  componentDidMount(){
-    console.log('Component Did Mount...')
-    fetch('https://ergast.com/api/f1/2021/10/driverStandings.json')
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        this.setState({
-          racers: data.MRData.StandingsTable.StandingsLists[0].DriverStandings
+    componentDidMount(){
+      console.log('Component Did Mount...')
+      fetch('https://ergast.com/api/f1/2021/10/driverStandings.json')
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          this.setState({
+            racers: data.MRData.StandingsTable.StandingsLists[0].DriverStandings
+          })
         })
-      })
-  }
+    }
 
   render() {
     console.log('Component Rendering...')
