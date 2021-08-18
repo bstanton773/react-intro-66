@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PostDetail from '../components/PostDetail';
 
 export default class Posts extends Component {
     constructor(props){
@@ -24,10 +25,9 @@ export default class Posts extends Component {
 
     render() {
         return (
-            <div>
-                This is the Post Page. 
-                {this.state.posts.map((post) => <h4>{post.title}</h4>)}
-            </div>
+            <ul className='list-group'>
+                {this.state.posts.map((post) => <PostDetail post={post} />)}
+            </ul>
         )
     }
 }
