@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PostDetail from '../components/PostDetail';
+import moment from 'moment';
 
 export default class Posts extends Component {
     constructor(props){
@@ -24,9 +25,13 @@ export default class Posts extends Component {
 
 
     render() {
+        let posts = this.state.posts
+        if (posts){
+            posts.sort((a,b) =>  moment(a.date_created) < moment(b.date_created) ? 1: -1)
+        }
         return (
             <ul className='list-group'>
-                {this.state.posts.map((post) => <PostDetail post={post} />)}
+                {posts.map((post, idx) => <PostDetail post={post} key={idx} />)}
             </ul>
         )
     }
