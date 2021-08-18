@@ -18,6 +18,7 @@ export default class Users extends Component {
                     users: data.users
                 })
             })
+            .catch(err => console.error(err))
     }
 
 
