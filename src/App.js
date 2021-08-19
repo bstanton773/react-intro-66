@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import { Switch, Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import About from './views/About';
+import CreatePost from './views/CreatePost';
 import CreateUser from './views/CreateUser';
 import Home from './views/Home';
 import Posts from './views/Posts';
+import SingleUser from './views/SingleUser';
 import Users from './views/Users';
 
 export default class App extends Component {
   constructor(props){
     super(props);
-    console.log('Component Constructing...')
+    // console.log('Component Constructing...')
     this.state = {
       myName: 'Brian',
       racers: []
@@ -25,11 +27,11 @@ export default class App extends Component {
   }
 
   componentDidMount(){
-    console.log('Component Did Mount...')
+    // console.log('Component Did Mount...')
     fetch('https://ergast.com/api/f1/2021/10/driverStandings.json')
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         this.setState({
           racers: data.MRData.StandingsTable.StandingsLists[0].DriverStandings
         })
@@ -37,7 +39,7 @@ export default class App extends Component {
   }
 
   render() {
-    console.log('Component Rendering...')
+    // console.log('Component Rendering...')
     const myName = this.state.myName;
     return (
       <div>
@@ -56,9 +58,13 @@ export default class App extends Component {
             <Route exact path='/posts'>
               <Posts />
             </Route>
-            <Route exact patch='/create-user'>
+            <Route exact path='/create-user'>
               <CreateUser />
             </Route>
+            <Route exact path='/create-post'>
+              <CreatePost />
+            </Route>
+            <Route exact path='/users/:id' component={SingleUser}/>
           </Switch>
         </div>
       </div>

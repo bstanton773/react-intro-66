@@ -3,7 +3,7 @@ import DriverInfo from '../components/DriverInfo';
 
 export default class Home extends Component {
     render() {
-        console.log(this.props);
+        // console.log(this.props);
         return (
             <div>
                 <h1>Welcome {this.props.myName}</h1>
