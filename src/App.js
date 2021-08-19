@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import About from './views/About';
+import CreatePost from './views/CreatePost';
 import CreateUser from './views/CreateUser';
 import Home from './views/Home';
 import Posts from './views/Posts';
@@ -56,8 +57,11 @@ export default class App extends Component {
             <Route exact path='/posts'>
               <Posts />
             </Route>
-            <Route exact patch='/create-user'>
+            <Route exact path='/create-user'>
               <CreateUser />
+            </Route>
+            <Route exact path='/create-post'>
+              <CreatePost />
             </Route>
           </Switch>
         </div>
