@@ -15,7 +15,7 @@ export default class Posts extends Component {
         fetch('http://localhost:5000/api/posts')
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 this.setState({
                     posts: data.posts
                 })

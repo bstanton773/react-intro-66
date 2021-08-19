@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export default class UserInfo extends Component {
     render() {
-        console.log(this.props.user);
+        // console.log(this.props.user);
         const user = this.props.user;
         return (
             <div className='col-12 col-sm-6 col-md-4'>

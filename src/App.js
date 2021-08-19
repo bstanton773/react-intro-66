@@ -11,7 +11,7 @@ import Users from './views/Users';
 export default class App extends Component {
   constructor(props){
     super(props);
-    console.log('Component Constructing...')
+    // console.log('Component Constructing...')
     this.state = {
       myName: 'Brian',
       racers: []
@@ -26,11 +26,11 @@ export default class App extends Component {
   }
 
   componentDidMount(){
-    console.log('Component Did Mount...')
+    // console.log('Component Did Mount...')
     fetch('https://ergast.com/api/f1/2021/10/driverStandings.json')
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         this.setState({
           racers: data.MRData.StandingsTable.StandingsLists[0].DriverStandings
         })
@@ -38,7 +38,7 @@ export default class App extends Component {
   }
 
   render() {
-    console.log('Component Rendering...')
+    // console.log('Component Rendering...')
     const myName = this.state.myName;
     return (
       <div>

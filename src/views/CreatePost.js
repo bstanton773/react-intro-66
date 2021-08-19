@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
 
 export default class CreatePost extends Component {
+    handlePostSubmit = (synthEvent) => {
+        synthEvent.preventDefault();
+        console.log(synthEvent);
+        const title = synthEvent.target.title.value;
+        const body = synthEvent.target.body.value;
+
+        console.log(title, body)
+    }
     render() {
         return (
             <div>
                 <h4>Create A Post</h4>
-                <form>
+                <form onSubmit={this.handlePostSubmit}>
                     <div className='form-group'>
                         <fieldset>
                             <label htmlFor='title'>Title</label>
@@ -15,6 +23,7 @@ export default class CreatePost extends Component {
                             <label htmlFor='body'>Body</label>
                             <input type='text' className='form-control' name='body' placeholder='Body'></input>
                         </fieldset>
+                        <button type='submit' className='btn btn-outline-secondary mt-3'>Create Post</button>
                     </div>
                 </form>
             </div>

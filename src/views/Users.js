@@ -14,7 +14,7 @@ export default class Users extends Component {
         fetch('http://localhost:5000/api/users')
             .then(r => r.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 this.setState({
                     users: data.users
                 })
