@@ -28,7 +28,7 @@ export default class Users extends Component {
             <div>
                 <Link to='/create-user' className='btn btn-success'>Create User</Link>
                 <div className='row'>
-                    {this.state.users.map((u, i) =><UserInfo user={u} key={i}/>)}
+                    {this.state.users.map((u, index) =><UserInfo user={u} key={index}/>)}
                 </div>
             </div>
         )
