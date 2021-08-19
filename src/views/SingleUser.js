@@ -21,6 +21,16 @@ export default class SingleUser extends Component {
             .catch(err => console.error(err))
     }
 
+    deleteUser = () => {
+        const user = this.state.user
+        fetch(`http://localhost:5000/api/users/delete/${user.id}`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(result => console.log(result))
+        .catch(error => console.error('error', error));
+    }
+
     render() {
         const user = this.state.user
         return (
@@ -33,6 +43,29 @@ export default class SingleUser extends Component {
                     <li className="list-group-item">Username: {user.username}</li>
                     <li className="list-group-item">Email: {user.email}</li>
                 </ul>
+                
+                <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                Delete User
+                </button>
+
+                
+                <div className="modal fade" id="deleteModal" tabIndex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="deleteModalLabel">Delete {user.username}?</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                        Are you sure that you would like to delete the user {user.username}?
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-danger" onClick={this.deleteUser}>Delete that user please!</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
             </div>
         )
     }
