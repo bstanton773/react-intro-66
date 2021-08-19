@@ -17,7 +17,6 @@ export default class CreateUser extends Component {
 
         let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        // myHeaders.append("Accept", "*/*")
        
         const requestBody = JSON.stringify({
             "username": username,

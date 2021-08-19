@@ -6,6 +6,7 @@ import CreatePost from './views/CreatePost';
 import CreateUser from './views/CreateUser';
 import Home from './views/Home';
 import Posts from './views/Posts';
+import SingleUser from './views/SingleUser';
 import Users from './views/Users';
 
 export default class App extends Component {
@@ -63,6 +64,7 @@ export default class App extends Component {
             <Route exact path='/create-post'>
               <CreatePost />
             </Route>
+            <Route exact path='/users/:id' component={SingleUser}/>
           </Switch>
         </div>
       </div>

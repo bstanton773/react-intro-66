@@ -8,7 +8,28 @@ export default class CreatePost extends Component {
         const body = synthEvent.target.body.value;
 
         console.log(title, body)
+
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+        "title": title,
+        "body": body,
+        });
+
+        const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw
+        };
+
+        fetch("http://localhost:5000/api/create-post", requestOptions)
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('error', error));
+
     }
+
     render() {
         return (
             <div>
