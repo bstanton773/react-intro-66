@@ -11,7 +11,13 @@ export default class Users extends Component {
     }
 
     componentDidMount(){
-        fetch('http://localhost:5000/api/users')
+        const token = localStorage.getItem('token');
+        let myHeaders = new Headers();
+        myHeaders.append('Authorization', 'Bearer ' + token)
+        fetch('http://localhost:5000/api/users',{
+            method: 'GET',
+            headers: myHeaders
+        })
             .then(r => r.json())
             .then(data => {
                 // console.log(data);
