@@ -5,6 +5,7 @@ import About from './views/About';
 import CreatePost from './views/CreatePost';
 import CreateUser from './views/CreateUser';
 import Home from './views/Home';
+import Login from './views/Login';
 import Posts from './views/Posts';
 import SingleUser from './views/SingleUser';
 import Users from './views/Users';
@@ -65,6 +66,9 @@ export default class App extends Component {
               <CreatePost />
             </Route>
             <Route exact path='/users/:id' component={SingleUser}/>
+            <Route exact path='/login'>
+              <Login />
+            </Route>
           </Switch>
         </div>
       </div>
