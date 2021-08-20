@@ -5,7 +5,7 @@ export default class Login extends Component {
         return (
             <div>
                 This is the Login Page
-                <form>
+                <form onSubmit={this.props.handleLogIn}>
                     <div className='form-group'>
                         <fieldset>
                             <label htmlFor='username'></label>

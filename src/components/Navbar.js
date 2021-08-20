@@ -27,9 +27,17 @@ export default class Navbar extends Component {
                                 </li>
                             </ul>
                             <ul className="navbar-nav ms-auto">
-                                <li className="nav-item">
-                                <Link className="nav-link" to="/login">Login</Link>
-                                </li>
+                                {this.props.isLoggedIn ? (
+                                        <li className="nav-item">
+                                        <Link className="nav-link" to="/">Logout</Link>
+                                        </li>
+                                    ) : (
+                                        <li className="nav-item">
+                                        <Link className="nav-link" to="/login">Login</Link>
+                                        </li>
+                                    )
+                                }
+                                
                             </ul>
                         </div>
                     </div>

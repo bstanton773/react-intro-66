@@ -16,7 +16,8 @@ export default class App extends Component {
     // console.log('Component Constructing...')
     this.state = {
       myName: 'Brian',
-      racers: []
+      racers: [],
+      isLoggedIn: false
     }
   }
 
@@ -39,12 +40,37 @@ export default class App extends Component {
       })
   }
 
+  handleLogIn = (e) => {
+    e.preventDefault();
+    console.log(e);
+    // Grab data from form
+    const username = e.target.username.value;
+    const password = e.target.password.value;
+
+    let myHeaders = new Headers();
+    const credentials = btoa(`${username}:${password}`);
+    myHeaders.append('Authorization', 'Basic ' + credentials);
+
+    fetch('http://localhost:5000/tokens', {
+      method: 'POST',
+      headers: myHeaders
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      this.setState({
+        isLoggedIn: true
+      })
+      localStorage.setItem('token', data.token)
+    })
+  }
+
   render() {
     // console.log('Component Rendering...')
     const myName = this.state.myName;
     return (
       <div>
-        <Navbar myName={myName}/>
+        <Navbar myName={myName} isLoggedIn={this.state.isLoggedIn}/>
         <div className='container'>
           <Switch>
             <Route exact path='/'>
@@ -67,7 +93,7 @@ export default class App extends Component {
             </Route>
             <Route exact path='/users/:id' component={SingleUser}/>
             <Route exact path='/login'>
-              <Login />
+              <Login handleLogIn={this.handleLogIn} />
             </Route>
           </Switch>
         </div>
