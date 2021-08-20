@@ -65,12 +65,19 @@ export default class App extends Component {
     })
   }
 
+  handleLogOut = () =>{
+    localStorage.removeItem('token');
+    this.setState({
+      isLoggedIn: false
+    })
+  }
+
   render() {
     // console.log('Component Rendering...')
     const myName = this.state.myName;
     return (
       <div>
-        <Navbar myName={myName} isLoggedIn={this.state.isLoggedIn}/>
+        <Navbar myName={myName} isLoggedIn={this.state.isLoggedIn} logOut={this.handleLogOut}/>
         <div className='container'>
           <Switch>
             <Route exact path='/'>
