@@ -5,6 +5,7 @@ import About from './views/About';
 import CreatePost from './views/CreatePost';
 import CreateUser from './views/CreateUser';
 import Home from './views/Home';
+import Login from './views/Login';
 import Posts from './views/Posts';
 import SingleUser from './views/SingleUser';
 import Users from './views/Users';
@@ -15,7 +16,8 @@ export default class App extends Component {
     // console.log('Component Constructing...')
     this.state = {
       myName: 'Brian',
-      racers: []
+      racers: [],
+      isLoggedIn: false
     }
   }
 
@@ -38,12 +40,44 @@ export default class App extends Component {
       })
   }
 
+  handleLogIn = (e) => {
+    e.preventDefault();
+    console.log(e);
+    // Grab data from form
+    const username = e.target.username.value;
+    const password = e.target.password.value;
+
+    let myHeaders = new Headers();
+    const credentials = btoa(`${username}:${password}`);
+    myHeaders.append('Authorization', 'Basic ' + credentials);
+
+    fetch('http://localhost:5000/tokens', {
+      method: 'POST',
+      headers: myHeaders
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      this.setState({
+        isLoggedIn: true
+      })
+      localStorage.setItem('token', data.token)
+    })
+  }
+
+  handleLogOut = () =>{
+    localStorage.removeItem('token');
+    this.setState({
+      isLoggedIn: false
+    })
+  }
+
   render() {
     // console.log('Component Rendering...')
     const myName = this.state.myName;
     return (
       <div>
-        <Navbar myName={myName}/>
+        <Navbar myName={myName} isLoggedIn={this.state.isLoggedIn} logOut={this.handleLogOut}/>
         <div className='container'>
           <Switch>
             <Route exact path='/'>
@@ -65,6 +99,9 @@ export default class App extends Component {
               <CreatePost />
             </Route>
             <Route exact path='/users/:id' component={SingleUser}/>
+            <Route exact path='/login'>
+              <Login handleLogIn={this.handleLogIn} />
+            </Route>
           </Switch>
         </div>
       </div>

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom';
 
 export default class SingleUser extends Component {
     constructor(props){
         super(props);
         this.state = {
-            user: {}
+            user: {},
+            redirect: null
         }
     }
 
@@ -23,17 +25,28 @@ export default class SingleUser extends Component {
 
     deleteUser = () => {
         const user = this.state.user
+        const token = localStorage.getItem('token');
+        let myHeaders = new Headers();
+        myHeaders.append('Authorization', 'Bearer ' + token)
         fetch(`http://localhost:5000/api/users/delete/${user.id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: myHeaders
         })
         .then(response => response.json())
-        .then(result => console.log(result))
+        .then(result => {
+            console.log(result)
+            this.setState({
+                redirect: '/'
+            })
+        })
         .catch(error => console.error('error', error));
     }
 
     render() {
         const user = this.state.user
         return (
+            this.state.redirect ? 
+            <Redirect to={this.state.redirect} /> :
             <div className="card mt-5">
                 <div className="card-header">
                     Account Information
@@ -61,7 +74,7 @@ export default class SingleUser extends Component {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-danger" onClick={this.deleteUser}>Delete that user please!</button>
+                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={this.deleteUser}>Delete that user please!</button>
                     </div>
                     </div>
                 </div>
